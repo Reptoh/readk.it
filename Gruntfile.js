@@ -764,7 +764,7 @@ module.exports = function(grunt) {
             $('html').attr('manifest', 'readkit.appcache');
             $('.library_link').attr('href', '../library.html');
             $('#readkit-entry').removeAttr('data-main');
- //           $('head link').remove();
+            // $('head link').remove();
             $('head link[rel="stylesheet"]').remove();
             $('head meta[name="apple-mobile-web-app-capable"]').before('<style><!--(bake css/screen.css)--></style>');
             $('script#readkit-client').remove();
@@ -778,8 +778,8 @@ module.exports = function(grunt) {
         options: {
           callback: function($) {
             $('.readkit-library').removeAttr('data-library');
-//            $('head meta[name="apple-mobile-web-app-capable"]').remove();
-//            $('head meta[name="apple-mobile-web-app-status-bar-style"]').remove();
+            // $('head meta[name="apple-mobile-web-app-capable"]').remove();
+            // $('head meta[name="apple-mobile-web-app-status-bar-style"]').remove();
           }
         },
         src: ['build/readkit/index.html']

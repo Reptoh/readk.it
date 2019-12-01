@@ -8,3 +8,4 @@ manifest.json
 node_modules
 /readkit.epub/html
 /readkit.epub/manifest.json
+*.sublime-*
