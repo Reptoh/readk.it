@@ -514,7 +514,15 @@ module.exports = function(grunt) {
         }
       }
     },
-
+    imagemin: {
+      dynamic: {
+        files: [{
+          expand: true,
+          src: ['**/*.{png,jpg,gif,svg}'],
+          dest: 'dist/img'
+        }]
+      }
+    }
   });
 
   // Load our grunt plugins.
@@ -532,6 +540,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-bake');
   grunt.loadNpmTasks('grunt-readkit-data-uri');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   // We have to create many of our grunt tasks dynamically, as we don't
   // knowwhich or how many EPUBs we'll be processing ahead of time.
@@ -613,6 +622,13 @@ module.exports = function(grunt) {
         files: [
           {expand: true, src: ['<%= readkit_dom_munger.data.clientScriptRefs %>'], cwd: oebps_path_src, dest: 'build/readkit/', filter: 'isFile'}
         ]
+      });
+
+      grunt.config('imagemin.' + identifier + '_compress_images', {
+        files: [{
+          expand: true,
+          src: ['<%= epub_src %>/' + path + '**/*.{png,jpg,gif,svg}']
+        }]
       });
 
       // Copy our EPUB files to the dist directory
@@ -1169,6 +1185,7 @@ module.exports = function(grunt) {
           'readkit_dom_munger:' + identifier + '_oebps',
           'readkit_dom_munger:' + identifier + '_opf',
           'readkit_dom_munger:' + identifier + '_opf_html',
+          'imagemin:' + identifier + '_compress_images',
           'copy:' + identifier + '_epub_to_dist',
           identifier + '_config_prod',
           'clean:build_readkit_js',
@@ -1203,6 +1220,7 @@ module.exports = function(grunt) {
           'readkit_dom_munger:'  + identifier + '_metaInf',
           'readkit_dom_munger:'  + identifier + '_oebps',
           'readkit_dom_munger:' + identifier + '_opf',
+          'imagemin:' + identifier + '_compress_images',
           'copy:' + identifier + '_epub_to_dist',
           'copy:' + identifier + '_readkit_dev_to_dist',
           'copy:' + identifier + '_readkit_assets_to_dist',
