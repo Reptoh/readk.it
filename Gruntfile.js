@@ -514,7 +514,10 @@ module.exports = function(grunt) {
         }
       }
     },
-    imagemin: {
+    image: {
+      options: {
+        optipng: ['-o7']
+      },
       dynamic: {
         files: [{
           expand: true,
@@ -540,7 +543,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-bake');
   grunt.loadNpmTasks('grunt-readkit-data-uri');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-image');
 
   // We have to create many of our grunt tasks dynamically, as we don't
   // knowwhich or how many EPUBs we'll be processing ahead of time.
@@ -624,7 +627,7 @@ module.exports = function(grunt) {
         ]
       });
 
-      grunt.config('imagemin.' + identifier + '_compress_images', {
+      grunt.config('image.' + identifier + '_compress_images', {
         files: [{
           expand: true,
           src: ['<%= epub_src %>/' + path + '**/*.{png,jpg,gif,svg}']
@@ -1185,7 +1188,7 @@ module.exports = function(grunt) {
           'readkit_dom_munger:' + identifier + '_oebps',
           'readkit_dom_munger:' + identifier + '_opf',
           'readkit_dom_munger:' + identifier + '_opf_html',
-          'imagemin:' + identifier + '_compress_images',
+          'image:' + identifier + '_compress_images',
           'copy:' + identifier + '_epub_to_dist',
           identifier + '_config_prod',
           'clean:build_readkit_js',
@@ -1220,7 +1223,7 @@ module.exports = function(grunt) {
           'readkit_dom_munger:'  + identifier + '_metaInf',
           'readkit_dom_munger:'  + identifier + '_oebps',
           'readkit_dom_munger:' + identifier + '_opf',
-          'imagemin:' + identifier + '_compress_images',
+          'image:' + identifier + '_compress_images',
           'copy:' + identifier + '_epub_to_dist',
           'copy:' + identifier + '_readkit_dev_to_dist',
           'copy:' + identifier + '_readkit_assets_to_dist',
