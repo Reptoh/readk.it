@@ -440,7 +440,7 @@ define([
     // For some reason this handler always fires twice in certain browsers
     // (Firefox and Safari, but not Chrome) -- deal with it.
     var readkit_dropdown_bookmark_ready = true;
-    $('#readkit-for-bookmark').on('click', function(){
+    $('#readkit-for-bookmark').on('touchstart click', function(){
         if (readkit_dropdown_bookmark_ready) {
             readkit_dropdown_bookmark_ready = false;
             if ( $('#readkit-dropdown-bookmark').is(':visible') ) {
