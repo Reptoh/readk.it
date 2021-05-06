@@ -516,7 +516,7 @@ module.exports = function(grunt) {
     },
     imagemin: {
       options: {
-        optipng: ['-o7']
+        optimizationLevel: 3,
       },
       dynamic: {
         files: [{
