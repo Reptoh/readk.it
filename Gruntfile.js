@@ -525,6 +525,14 @@ module.exports = function(grunt) {
           dest: 'dist/img'
         }]
       }
+    },
+    unzip: {
+      'long-format': {
+        // Note: If you provide multiple src files, they will all be extracted to the same folder.
+        // This is not well-tested behavior so use at your own risk.
+        src: 'input/*.epub',
+        dest: 'readkit.epub/'
+      }
     }
   });
 
@@ -544,6 +552,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bake');
   grunt.loadNpmTasks('grunt-readkit-data-uri');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-zip');
 
   // We have to create many of our grunt tasks dynamically, as we don't
   // knowwhich or how many EPUBs we'll be processing ahead of time.
@@ -593,6 +602,16 @@ module.exports = function(grunt) {
       var oebps_path_dest = 'dist/readkit.epub/' + path + '<%= readkit_dom_munger.data.oebpsRef %>';
 
       var solo_path_dest = 'dist/readkit.solo/<%= epub_src %>/' + path;
+
+      // Unzip epub file
+      // grunt.config('unzip.epub', {
+      //   'long-format': {
+      //     // Note: If you provide multiple src files, they will all be extracted to the same folder.
+      //     // This is not well-tested behavior so use at your own risk.
+      //     src: 'input/*.epub',
+      //     dest: 'readkit.epub/'
+      //   }
+      // });
 
       // Read the manifest entries from the opf file
       grunt.config('readkit_dom_munger.' + identifier + '_opf', {
@@ -1360,6 +1379,6 @@ For more information, visit the [Readk.it home page](http://readk.it)
     grunt.file.write('dist/readkit.solo/README.md', readme);
   });
 
-  grunt.registerTask('default', ['shell:make_manifest_prod']);
-  grunt.registerTask('dev', ['shell:make_manifest_dev']);
+  grunt.registerTask('default', ['unzip', 'shell:make_manifest_prod']);
+  grunt.registerTask('dev', ['unzip', 'shell:make_manifest_dev']);
 };

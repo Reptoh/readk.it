@@ -32,5 +32,8 @@
   },
   "author": "Jason Darwin",
   "license": "BSD",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "grunt-zip": "^0.18.2"
+  }
 }
