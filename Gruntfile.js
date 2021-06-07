@@ -530,8 +530,18 @@ module.exports = function(grunt) {
       'long-format': {
         // Note: If you provide multiple src files, they will all be extracted to the same folder.
         // This is not well-tested behavior so use at your own risk.
-        src: 'input/*.epub',
+        src: 'data/input/*.epub',
         dest: 'readkit.epub/'
+      }
+    },
+    nodemon: {
+      dev: {
+          script: 'server.js',
+          options: {
+            watch: ['dist/'],
+            delay: 10,
+            ext: 'js,css,jpg,xml,xhtml',
+          }
       }
     }
   });
@@ -553,6 +563,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-readkit-data-uri');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-zip');
+  grunt.loadNpmTasks('grunt-nodemon');
 
   // We have to create many of our grunt tasks dynamically, as we don't
   // knowwhich or how many EPUBs we'll be processing ahead of time.
@@ -676,6 +687,15 @@ module.exports = function(grunt) {
             dest: oebps_path_dest + '/readk.it'},
           {expand: true, cwd: 'build/readkit/css', src: ['**', '!screen.css'],
             dest: oebps_path_dest + '/readk.it/css', filter: 'isFile'}
+        ]
+      });
+
+      grunt.config('copy.' + identifier + '_readkit_to_volume', {
+        options: {
+        },
+        files: [
+          {expand: true, cwd: 'dist/readkit.solo/', src: ['**/*.zip'],
+            dest: 'data/output/'}
         ]
       });
 
@@ -1033,7 +1053,7 @@ module.exports = function(grunt) {
         command: [
           'echo Zipping ' + identifier + '_' + name + '.html...',
           'cd dist/readkit.solo/',
-          'zip -DX9 ' + identifier + '_' + name + '.zip ' + identifier + '_' + name + '.html',
+          'zip -DX9 ' + identifier + '_' + name + '.zip -r .',
         ].join('&&'),
         options: {
           stdout: true,
@@ -1232,7 +1252,9 @@ module.exports = function(grunt) {
           'copy:' + identifier + '_solo_index_to_dist',
           'shell:' + identifier + '_zip_solo',
           'copy:' + identifier + '_cover_to_library',
-          'readme_solo'
+          'readme_solo',
+          'copy:' + identifier + '_readkit_to_volume'
+
         ];
         prodTasks = prodTasks.concat(tasksForProd);
         prodLiteTasks = prodLiteTasks.concat(tasksForProd);
@@ -1365,20 +1387,22 @@ For more information, visit the [Readk.it home page](http://readk.it)
 
   grunt.registerTask('readme_solo', 'Write the Readkit Solo Readme file', function(){
     var readme = function () {/*
-#Readkit Solo
+    #Readkit Solo
 
-Each html file in this directory contains EPUB content which can be read in one of two ways:
+    Each html file in this directory contains EPUB content which can be read in one of two ways:
 
-1. Double-click a html file in this directory to open the it in a browser (i.e. using a file URL)
-2. Web-serve the html file
+    1. Double-click a html file in this directory to open the it in a browser (i.e. using a file URL)
+    2. Web-serve the html file
 
-Either using a file URL or web-served, drag and drop another EPUB file onto the browser window to start reading
+    Either using a file URL or web-served, drag and drop another EPUB file onto the browser window to start reading
 
-For more information, visit the [Readk.it home page](http://readk.it)
+    For more information, visit the [Readk.it home page](http://readk.it)
       */}.toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
     grunt.file.write('dist/readkit.solo/README.md', readme);
   });
 
   grunt.registerTask('default', ['unzip', 'shell:make_manifest_prod']);
   grunt.registerTask('dev', ['unzip', 'shell:make_manifest_dev']);
+  // grunt.registerTask('server', ['nodemon']);
+  // grunt.registerTask('output', ['copy:readkit_to_volume']);
 };

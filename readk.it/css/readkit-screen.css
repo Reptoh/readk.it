@@ -1,48 +1,48 @@
 @font-face {
   font-family: "Source Sans Pro";
-  src: local("SourceSansPro-Regular"), url('../fonts/SourceSansPro/SourceSansPro-Regular.woff?1383360617') format('woff');
+  src: local("SourceSansPro-Regular"), url('../fonts/SourceSansPro/SourceSansPro-Regular.woff?1620422499') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "Source Sans Pro";
-  src: local("SourceSansPro-Bold"), url('../fonts/SourceSansPro/SourceSansPro-Bold.woff?1383360617') format('woff');
+  src: local("SourceSansPro-Bold"), url('../fonts/SourceSansPro/SourceSansPro-Bold.woff?1620422499') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: "Source Sans Pro";
-  src: local("SourceSansPro-It"), url('../fonts/SourceSansPro/SourceSansPro-It.woff?1383360617') format('truetype');
+  src: local("SourceSansPro-It"), url('../fonts/SourceSansPro/SourceSansPro-It.woff?1620422499') format('truetype');
   font-weight: 400;
   font-style: italic;
 }
 @font-face {
   font-family: "Source Sans Pro";
-  src: local("SourceSansPro-BoldIt"), url('../fonts/SourceSansPro/SourceSansPro-BoldIt.woff?1383360617') format('truetype');
+  src: local("SourceSansPro-BoldIt"), url('../fonts/SourceSansPro/SourceSansPro-BoldIt.woff?1620422499') format('truetype');
   font-weight: 700;
   font-style: italic;
 }
 @font-face {
   font-family: "Lora";
-  src: local("Lora-Regular"), url('../fonts/Lora/Lora.woff?1383360617') format('woff');
+  src: local("Lora-Regular"), url('../fonts/Lora/Lora.woff?1620422499') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "Lora";
-  src: local("Lora-Bold"), url('../fonts/Lora/Lora-Bold.woff?1383360617') format('woff');
+  src: local("Lora-Bold"), url('../fonts/Lora/Lora-Bold.woff?1620422499') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: "Lora";
-  src: local("Lora-Italic"), url('../fonts/Lora/Lora-Italic.woff?1383360617') format('truetype');
+  src: local("Lora-Italic"), url('../fonts/Lora/Lora-Italic.woff?1620422499') format('truetype');
   font-weight: 400;
   font-style: italic;
 }
 @font-face {
   font-family: "Lora";
-  src: local("Lora-BoldItalic"), url('../fonts/Lora/Lora-BoldItalic.woff?1383360617') format('truetype');
+  src: local("Lora-BoldItalic"), url('../fonts/Lora/Lora-BoldItalic.woff?1620422499') format('truetype');
   font-weight: 700;
   font-style: italic;
 }
